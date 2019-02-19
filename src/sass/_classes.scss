@@ -1,0 +1,65 @@
+/**
+ * @name    SPanelComponent
+ * Provide some clean panel with colors support
+ *
+ * @example   html
+ * <div class="panel panel--success">
+ *   <p class="p">
+ *     Etiam ut leo sit amet nibh lacinia finibus. Pellentesque ultricies.
+ *   </p>
+ * </div>
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * Print out the bare and style component css
+ * Generated classes:
+ * - `.panel`
+ * - `.panel--{color}`
+ * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
+ */
+@mixin s-panel-classes(
+  $colors: default primary secondary
+) {
+  @include s-panel-classes-bare();
+  @include s-panel-classes-style($colors);
+}
+
+/**
+ * Print out the bare component css
+ * Generated classes:
+ * - `.panel`
+ */
+@mixin s-panel-classes-bare() {
+  @include s-component('panel') {
+    .#{s-component()} {
+      @include s-panel-bare();
+    }
+  }
+}
+
+/**
+ * Print out the style component css
+ * Generated classes:
+ * - `.panel`
+ * - `.panel--{color}`
+ * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
+ */
+@mixin s-panel-classes-style(
+  $colors: default primary secondary
+) {
+  @include s-component('panel') {
+    @each $color in $colors {
+      $sel : ".#{s-component()}--#{$color}";
+
+      @if $color == default {
+        $sel : ".#{s-component()}";
+      }
+
+      #{$sel} {
+        @include s-panel-style($color);
+      }
+    }
+  }
+}

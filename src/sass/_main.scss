@@ -1,0 +1,49 @@
+/**
+ * @name    SPanelComponent
+ * Provide some clean panel with colors support
+ *
+ * @example   html
+ * <div class="panel panel--success">
+ *   <p class="p">
+ *     Etiam ut leo sit amet nibh lacinia finibus. Pellentesque ultricies.
+ *   </p>
+ * </div>
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * Print out the bare and style component css
+ * @param 	{List<Color>} 		[$color=default] 		The color to generate
+ */
+@mixin s-panel(
+  $color: default
+) {
+  @include s-panel-bare();
+  @include s-panel-style($color);
+}
+
+/**
+ * Print out the bare component css
+ */
+@mixin s-panel-bare() {
+  @include s-component('panel') {
+    padding: s-space(default);
+    border-radius: s-lnf(border-radius);
+    display: block;
+  }
+}
+
+/**
+ * Print out the style component css
+ * @param 	{Color} 		[$color=default] 		The color to generate
+ */
+@mixin s-panel-style(
+  $color: default
+) {
+  @include s-component('panel') {
+    background-color: s-color($color, -lightness 95);
+    border: 1px solid s-color($color, -lightness 85);
+    color: s-color($color);
+  }
+}
